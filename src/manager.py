@@ -17,3 +17,10 @@ class Manager:
         self.tenants = Tenant.from_json_file(self.parameters.tenants_json_path)
         self.transfers = Transfer.from_json_file(self.parameters.transfers_json_path)
         self.bills = Bill.from_json_file(self.parameters.bills_json_path)
+
+
+    def validate_tenant_apartments(self) -> bool:
+        for tenant in self.tenants.values():
+            if tenant.apartment not in self.apartments:
+                return False
+        return True
